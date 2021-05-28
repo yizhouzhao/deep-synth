@@ -7,6 +7,8 @@ The pickle version can then be handled by the Dataset class
 import os
 import json
 import pickle
+
+from PIL import Image
 from data import ObjectData, House, ObjectCategories, TopDownView
 from abc import ABC, abstractmethod
 import scipy.misc as m
@@ -186,7 +188,10 @@ class DatasetRenderer(DatasetAction):
                     with open(f"{self.dest_dir}/{self.count}.pkl","wb") as f:
                         pickle.dump((data, room), f, pickle.HIGHEST_PROTOCOL)
 
-                    img = m.toimage(img, cmin=0, cmax=1)
+                    img = Image.fromarray(img)
+                    if img.mode != 'RGB':
+                        img = img.convert('RGB')
+                    #img = m.toimage(img, cmin=0, cmax=1)
                     img.save(f"{self.dest_dir}/{self.count}.jpg")
                     print(f"Rendering room {self.count}...", end="\r")
                     self.count += 1

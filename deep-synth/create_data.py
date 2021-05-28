@@ -9,6 +9,11 @@ import shutil
 from utils import get_data_root_dir
 from data.object import parse_objects
 
+# add suncg 
+import os
+sungcg_root_dir = "/home/ubuntu/research/suncg"
+os.environ["SCENESYNTH_DATA_PATH"] = sungcg_root_dir
+
 root_dir = get_data_root_dir()
 
 parse_objects()

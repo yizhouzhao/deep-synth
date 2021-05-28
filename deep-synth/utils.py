@@ -64,7 +64,7 @@ def stdout_redirected(to=os.devnull):
     From https://stackoverflow.com/questions/5081657/how-do-i-prevent-a-c-shared-library-to-print-on-stdout-in-python
     Suppress C warnings
     """
-    fd = sys.stdout.fileno()
+    fd = 1 #sys.stdout.fileno()
 
     ##### assert that Python and C stdio write using the same file descriptor
     ####assert libc.fileno(ctypes.c_void_p.in_dll(libc, "stdout")) == fd == 1
